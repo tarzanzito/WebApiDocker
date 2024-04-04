@@ -1,11 +1,15 @@
 ﻿
-http://localhost:9595/Explorer
-
-$ docker volume create myvol2
+-- build
 
 $ docker build -t test-expose:009 -f Dockerfile .
 
--- name:tag
+-- http://localhost:9595/Explorer
+
+--prepare and run
+
+$ docker volume create myvol2
+
+//name:tag
 
 $ docker run -d -p 9595:8080 -v myvol2:/App/MyVol2 -v D:\Republica:/App/MyVol1 --name my-expose-9 test-expose:009
 (with option --rm  after stop container it is removed)
@@ -22,4 +26,3 @@ $ docker container remove my-expose-9
 
 $ docker image remove my-expose-9 test-expose:009
 
-$docker 
