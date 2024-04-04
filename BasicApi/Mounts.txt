@@ -1,0 +1,20 @@
+﻿       
+       "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "D:\\Republica",
+                "Destination": "/App/MyVol1",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "myvol2",
+                "Source": "/var/lib/docker/volumes/myvol2/_data",
+                "Destination": "/App/MyVol2",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            }
