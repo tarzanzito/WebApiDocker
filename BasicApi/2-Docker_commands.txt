@@ -1,0 +1,81 @@
+﻿/
+/ https://docs.docker.com/language/dotnet/containerize/          view c#
+
+
+//create image
+# docker build -t my-first-dotnet-image -f Dockerfile .       ok
+//-t name:tag
+//-f 
+
+# docker images
+-----------------------------------------------------------------------------------------
+REPOSITORY                         TAG       IMAGE ID       CREATED          SIZE
+my-first-dotnet-image              latest    16b39651a515   29 minutes ago   221MB
+-----------------------------------------------------------------------------------------
+
+# docker scout quickview
+
+//crate container (acho que tem de levar prefixo 'paulomfgoncalves.'  para subirem fockerHub )
+# docker create --name paulomfgoncalves.my-first my-first-dotnet-image
+
+
+//run and stay in terminal
+
+# docker run -it   -p 8585:8080 --name MyName my-first-dotnet-image /bin/bash 
+# docker run -i -t -p 8585:8080               my-first-dotnet-image /bin/bash 
+//or
+docker attach my-first-dotnet-image (for already running container)
+
+ (ctrl + d  -> exit and terminate container
+ (ctrl + c, ctrl + q)  -> exit and container continues alive
+
+// -i, --interactive   Keep STDIN open even if not attached
+// -t, --tty           Allocate a pseudo-TTY
+//--rm                 Automatically remove the container when it exits
+// -p, --publish       8080:8080  - ports
+//--name string        Assign a name to the container
+// -v, --volume        list  Bind mount a volume
+// --mount             'source=myvol2,target=/app'  Attach a filesystem mount to the container
+
+
+//port
+docker run -d -p 8585:8080 docker-gs-ping
+docker run --publish 8585:8080 docker-gs-ping
+
+//Volume
+
+
+
+
+
+//view containers
+docker ps -a
+
+//start container
+docker start paulomfgoncalves.my-first
+
+docker attach --sig-proxy=false paulomfgoncalves.my-first
+
+//cria container e corre
+docker run -p 8585:8080 my-first-dotnet-image
+docker run -d -p 8585:8080 --name my-first-dotnet-image xxxx
+
+docker attach --sig-proxy=false xxxx
+
+
+log
+--------------------------------------------------------------------------------------------
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[14]
+2024-03-31 16:30:36       Now listening on: http://[::]:8080
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[0]
+2024-03-31 16:30:36       Application started. Press Ctrl+C to shut down.
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[0]
+2024-03-31 16:30:36       Hosting environment: Production
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[0]
+2024-03-31 16:30:36       Content root path: /App
+2024-03-31 16:31:01 warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+2024-03-31 16:31:01       Failed to determine the https port for redirect.
+---------------------------------------------------------------------------------------------
+
+
+saber diferença entre: http://[::]:8080 e http://localhost:8080

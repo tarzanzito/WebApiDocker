@@ -1,0 +1,63 @@
+﻿/////////////////////////////
+// Csharp - create project //
+/////////////////////////////
+
+# dotnet new console -o FolderName -n ProJecName --use-program-main
+# dotnet new webapi -o FolderName -n ProJecName --use-program-main --use-controllers
+// --no-openapi   - nao cria ambiente swagger
+// --use-program-main  - no use top level , create Program Classe and Main method
+// --use-controllers   - use controller, not minimal
+
+////////////////////////////////////////////
+// Csharp - build / run / publish project //
+////////////////////////////////////////////
+
+(WORKDIR)
+# CD "where is *.csproj file (root folder)" (WORKDIR)
+
+//restore
+# dotnet restore      - Restores (get from web reposirory) the dependencies and tools of a project.
+# dotnet restore  MyProject.csproj
+
+//build
+# dotnet build MyApi.csproj -c release -o release       - result in (WORKDIR)/release)
+# dotnet build MyApi.csproj -c release 
+
+//run
+dotnet run
+dotnet run --urls http://localhost:8585
+//NOTA: pelo facto de arrancar no porto 8585 tem sempre não tem implicações no docker container !!!
+//      temos sempre explicitar no docker run (ou no docker)
+
+//publish 
+dotnet publish -c Release  -o out      - result in (WORKDIR)/out)
+
+
+//exeute APP
+cd out
+
+# ./appName.exe
+# ./appName.exe --urls=https://localhost:8585
+
+//change listen port in settings 
+in 'appsettings.json' add   ' "urls": "http://localhost:8585",  '
+
+//call api
+
+https://localhost:8585/WeatherForecast  (change port)
+
+
+log
+--------------------------------------------------------------------------------------------
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[14]
+2024-03-31 16:30:36       Now listening on: http://[::]:8585  or http://localhost:8585 or http://127.0.0.1:8585
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[0]
+2024-03-31 16:30:36       Application started. Press Ctrl+C to shut down.
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[0]
+2024-03-31 16:30:36       Hosting environment: Production
+2024-03-31 16:30:36 info: Microsoft.Hosting.Lifetime[0]
+2024-03-31 16:30:36       Content root path: /App
+2024-03-31 16:31:01 warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+2024-03-31 16:31:01       Failed to determine the https port for redirect.
+---------------------------------------------------------------------------------------------
+

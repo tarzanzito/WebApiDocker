@@ -1,0 +1,4 @@
+﻿
+# nome:tag
+
+docker build -t test-expose:003 -f Dockerfile .
