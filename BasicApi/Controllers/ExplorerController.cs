@@ -15,6 +15,7 @@ namespace MyAPI.Controllers
     [Route("[controller]")]
     public class ExplorerController : ControllerBase
     {
+        #region comments
 
         //build
         //$ docker build -t test-expose:008 -f Dockerfile .
@@ -35,26 +36,25 @@ namespace MyAPI.Controllers
         //
         //http://localhost:9595/Explorer
         //
-        public ExplorerController()
-        {
-        }
+
+        #endregion
 
         [HttpGet]
         public IActionResult Get()
         {
-            string v1 = Vol1();
-            string v2 = Vol2();
+            string volOneResult = GetVolumeOne();
+            string volTwoResult = GetVolumeTwo();
 
-            var json2 = new
+            var anonymousType = new
             {
-                resultVol1 = v1,
-                resultVol2 = v2
+                volumeOne = volOneResult,
+                volumeTwo = volTwoResult
             };
 
-            return Ok(json2);
+            return Ok(anonymousType);
         }
 
-        private string Vol1()
+        private string GetVolumeOne()
         {
             string absoutePath = @"/App/MyVol1";
 
@@ -103,7 +103,7 @@ namespace MyAPI.Controllers
             return json2.ToString();
         }
 
-        private string Vol2()
+        private string GetVolumeTwo()
         {
             string absoutePath = @"/App/MyVol2";
 

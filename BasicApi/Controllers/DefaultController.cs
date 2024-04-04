@@ -6,18 +6,6 @@ namespace MyAPI.Controllers
     [Route("")]
     public class DefaultController : ControllerBase
     {
-
-        //private readonly ILogger<WeatherForecastController> _logger;
-
-        //public BasicController(ILogger<WeatherForecastController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        public DefaultController()
-        {
-        }
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -26,8 +14,8 @@ namespace MyAPI.Controllers
                 Message = "Welcome to the machine",
                 Now = DateTime.Now.ToString()
             };
-            return this.Ok(anonymousType);
 
+            return Ok(anonymousType);
         }
     }
 }
