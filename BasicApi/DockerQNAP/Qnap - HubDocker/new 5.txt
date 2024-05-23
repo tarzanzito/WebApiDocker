@@ -1,0 +1,125 @@
+docker image
+------------
+
+load        Load an image from a tar archive or STDIN
+save        Save one or more images to a tar archive (streamed to STDOUT by default)
+
+QNAP (Linux, via Putty)
+------
+
+[me@NAS-QNAP ~]$ cd ~
+
+[me@NAS-QNAP ~]$ pwd
+/share/homes/me
+
+[me@NAS-QNAP ~]$ docker images
+REPOSITORY                        TAG       IMAGE ID       CREATED         SIZE
+test-expose-001                   latest    a40df5bff7e1   3 days ago      221MB
+
+
+[me@NAS-QNAP ~]$ docker save test-expose-001  -o img-test-expose-001.tar
+
+[me@NAS-QNAP ~]$ ls -lha
+total 241M
+drwxr-xr-x 15 me                  everyone       4.0K 2024-04-09 10:00 ./
+drwxrwxrwx 10 admin               administrators 4.0K 2023-12-04 15:07 ../
+-rw-------  1 me                  everyone       215M 2024-04-09 10:00 img-test-expose-001.tar
+
+
+---COPY \\NAS-QNAP\home\img-test-expose-001.tar to e:\_temp ------------------------------------
+
+
+Windows Powershell
+------------------
+$ cd e:\_temp
+
+$ Copy-Item \\NAS-QNAP\home\img-test-expose-001.tar e:\_temp
+
+$ ls *.tar
+
+    Directory: E:\_Temp
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          2024-04-09    10:00      224971776 img-test-expose-001.tar
+
+
+$ docker images
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+nginx                          latest    9eee96112def   14 months ago   142MB
+
+
+
+
+(load image generated in qnap) SABER como dar a TAG ?!?!?!?
+$ docker image load -i img-test-expose-001.tar
+424ffa5faea8: Loading layer [==================================================>]  1.536kB/1.536kB
+3b57fd3b2798: Loading layer [==================================================>]  4.039MB/4.039MB
+Loaded image: test-expose-001:latest
+
+
+PS E:\_Temp> docker images
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test-expose-001                latest    a40df5bff7e1   3 days ago      221MB     <---------------
+nginx                          latest    9eee96112def   14 months ago   142MB
+
+
+Push para hub-docker
+---------------------
+$ docker logout
+Removing login credentials for https://index.docker.io/v1/
+
+$ docker login
+Log in with your Docker ID or email address to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com/ to create one.
+You can log in with your password or a Personal Access Token (PAT). Using a limited-scope PAT grants better security and is required for organizations using SSO. Learn more at https://docs.docker.com/go/access-tokens/
+
+Username: paulomfgoncalves
+Password:
+
+Login Succeeded
+---------------------------------------------
+Push to hub docker
+
+-a imagem tem de ter prefixo: dockerUser/image:tag 
+-tem de se criar primeiro a imagem no hub.docker  (confirmar)
+-tem de ser private  (confirmar)
+
+--rename
+$ docker tag test-expose:011 paulomfgoncalves/test-expose:020
+
+
+$ docker push paulomfgoncalves/test-expose:020
+The push refers to repository [docker.io/paulomfgoncalves/test-expose]
+eb909525e392: Pushed
+6ea75ac19ad0: Pushed
+d335a048c29f: Pushed
+9ca27d82a225: Pushed
+6e6aed7ced0d: Pushed
+a80e3c10ac79: Pushed
+0f0ebfa56a19: Pushed
+a483da8ab3e9: Mounted from mdsol/dotnet80-runtime
+020: digest: sha256:17c9008096779bdcd622caf5513f47a153d5f71aa168198ba863dbfcbcabd6a5 size: 1997
+
+
+
+$ docker pull paulomfgoncalves/test-expose:020
+020: Pulling from paulomfgoncalves/test-expose
+Digest: sha256:17c9008096779bdcd622caf5513f47a153d5f71aa168198ba863dbfcbcabd6a5
+Status: Image is up to date for paulomfgoncalves/test-expose:020
+docker.io/paulomfgoncalves/test-expose:020
+------------------------------------------
+
+
+$ docker tag win10-expose:001 paulomfgoncalves/win10-expose:001
+
+
+PS C:\Users\Paulo> docker push paulomfgoncalves/win10-expose:001
+The push refers to repository [docker.io/paulomfgoncalves/win10-expose]
+An image does not exist locally with the tag: paulomfgoncalves/win10-expose
+
+
+docker push paulomfgoncalves/test-expose:tagname
+docker pull paulomfgoncalves/test-expose:latest
+
+
+

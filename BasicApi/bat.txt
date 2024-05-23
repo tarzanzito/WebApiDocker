@@ -3,16 +3,23 @@
 
 $ docker build -t test-expose:009 -f Dockerfile .
 
--- http://localhost:9595/Explorer
 
 --prepare and run
 
+----volumes
+----- relaciona directorios entre host e container:
+----- myvol2:/App/MyVol2       (host/container)  
+----- D:\Republica:/App/MyVol1 (host/container)
+
+----default /var/lib/docker/volumes/myvol2/_data/myvol2 (in host)
 $ docker volume create myvol2
 
 //name:tag
 
 $ docker run -d -p 9595:8080 -v myvol2:/App/MyVol2 -v D:\Republica:/App/MyVol1 --name my-expose-9 test-expose:009
 (with option --rm  after stop container it is removed)
+
+-----------------------------------------------
 
 -- extras
 
@@ -26,3 +33,9 @@ $ docker container remove my-expose-9
 
 $ docker image remove my-expose-9 test-expose:009
 
+
+----------------------------------------------
+
+-- http://localhost:9595
+-- http://localhost:9595/Explorer
+---http://localhost:9595/swagger/index.html

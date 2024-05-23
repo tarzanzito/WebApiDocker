@@ -1,0 +1,15 @@
+
+via terminal (putty)
+
+
+$ docker run -d -p 9595:8080 --name win10-basic-1 img-win10-basicapi-001
+
+$ docker run -d -p 9595:8080 -v myvol2:/App/MyVol2 -v /home/me:/App/MyVol1 --name win10-basic-1 img-win10-basicapi-001
+
+
+resources
+---------
+
+https://localhost:9595/
+https://localhost:9595/Explorer
+https://localhost:9595/swagger/index.html

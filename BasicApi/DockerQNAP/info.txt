@@ -1,0 +1,20 @@
+
+VOLUMES:
+"/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/volumes"
+
+Name:"my-vol1"
+"/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/volumes/my-vol1/_data"
+
+
+music
+/share/CACHEDEV1_DATA/music/_COLLECTION
+
+music_lossless
+/share/CACHEDEV2_DATA/music_lossless/_COLLECTION
+
+
+
+
+
+CREATE Link linux
+ln -s /mnt/e/Torrents10 ./pmfg

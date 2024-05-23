@@ -1,16 +1,19 @@
 ﻿
-# docker build -t imageName:TagName -f Dockerfile .
-
 #######################
 #STEP 1 - build only
 #######################
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 
-# Any RUN, CMD, ADD, COPY, or ENTRYPOINT command will be executed in the specified working directory.
+
+#adiciona informação no metadata da imagem. quando 'docker image inspect' - encontramos em 'Config/labels' (Label key=value)
+LABEL mystage=builder
+LABEL myname="Paulo"
+
+# directorio de trabalhos. commandos: Any RUN, CMD, ADD, COPY, or ENTRYPOINT são executados neste directorio.
 WORKDIR /App
 
-# Copy everything,  COPY <src-path> <destination-path>
+# Copia tudo,  COPY <src-path> <destination-path>
 COPY . ./
 
 # Restore as distinct layers , run a linux command
@@ -18,23 +21,28 @@ RUN dotnet restore
 
 # Build and publish a release
 RUN dotnet publish -c Release -o out
+#RUN dotnet publish -c Release -r linux-x64 -o out
 
 ############################################################
 #STEP 2 - runtime only  - cria uma imagem sem os sources
 ############################################################
 
-
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as production-env
 
+
 WORKDIR /App
 
-#copy all from image named 'build-env' /App/out to WORRDIR
+#copia todos do resultado do WORKDIR de 'as build-env' para /App/out
 COPY --from=build-env /App/out .
 
-# no dockerHub quando se faz start, nas configuracoes ficámos a poder dizer que: portoExterno:8080
+# Portos do container a ficarem expostos : portoExterno:8080
 EXPOSE 8080
 
+# volumes necessarios (necessario dizer no run -v MyLogs:/App/Logs)
+VOLUME MyLogs
+
+# aplicação que deve correr
 ENTRYPOINT ["dotnet", "BasicApi.dll"]
 
 

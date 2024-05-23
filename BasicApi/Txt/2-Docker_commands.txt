@@ -79,3 +79,6 @@ log
 
 
 saber diferença entre: http://[::]:8080 e http://localhost:8080
+
+
+docker images -a  --- list all include intermediate

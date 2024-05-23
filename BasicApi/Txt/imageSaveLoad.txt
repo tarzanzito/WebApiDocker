@@ -1,0 +1,34 @@
+
+==============
+Docker Image
+==============
+
+--save
+$ docker save win10-basicapi:001 -o img-win10-basicapi-001.tar    (alias to 'docker image save')
+$ docker image save win10-basicapi:001 -o img-win10-basicapi-001.tar 
+
+--load
+$ docker load -i ./img-win10-basicapi-001.tar     (alias to 'docker image load')
+$ docker image load -i ./img-win10-basicapi-001.tar 
+
+
+
+
+
+===========
+Container (when is running)  (exports a snapshot of the container)
+===========
+
+--export
+$ docker export -o latest.tar containerID               (alias to 'docker container export')
+$ docker container export -o container.tar containerID     
+
+--import       
+$ docker import container.tar calcfs:latest   (alias to 'docker image import')
+$ docker image import container.tar calcfs:latest
+
+Options:
+  -c, --change list       Apply Dockerfile instruction to the created image
+  -m, --message string    Set commit message for imported image
+
+

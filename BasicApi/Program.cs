@@ -9,7 +9,7 @@ namespace MyAPI
     {
         public static void Main(string[] args)
         {
-            Log.Logger = ConfigureSerilog("MyApi.log");
+            Log.Logger = ConfigureSerilog("Logs/application.log");
 
             var builder = WebApplication.CreateBuilder(args);
             

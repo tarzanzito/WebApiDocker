@@ -1,0 +1,21 @@
+
+win10
+------
+
+$ docker build -t win10-basicapi:001 -f Dockerfile .
+
+$ docker save win10-basicapi:001 -o img-win10-basicapi-001.tar    <----------
+
+$ copy img-win10-basicapi-001.tar \\NAS-QNAP\Temp 
+
+==================================================================
+
+QNAP - terminal (putty)
+----
+$ pwd
+/share/Temp
+
+$ docker image load -i ./img-win10-basicapi-001.tar   <----------
+Loaded image: win10-basicapi:001
+
+==================================================================
