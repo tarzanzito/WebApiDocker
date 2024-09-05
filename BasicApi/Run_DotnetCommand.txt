@@ -1,0 +1,37 @@
+
+1 - dotnet run
+
+Note: ports can be changed in "appsettings.json"
+
+...
+  "AllowedHosts": "*",
+  "Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "http://localhost:5400"  
+      },
+      "Https": {
+        "Url": "https://localhost:5401"
+      }
+    }
+  }
+...
+
+2 - dotnet run --urls "http://localhost:8076;https://localhost:8077"
+
+Note:No ports in "appsettings.json"
+
+...
+  "AllowedHosts": "*"
+...
+
+3 - dotnet run --urls "http://127.0.0.1:8070;https://127.0.0.1:8071"
+
+4 - dotnet run --urls "http://[::1]:8078;https://[::1]:8079"
+
+
+5 - swagger
+https://localhost:port/swagger/index.html
+
+INFOS:
+https://andrewlock.net/8-ways-to-set-the-urls-for-an-aspnetcore-app/

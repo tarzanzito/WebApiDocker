@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Serilog;
+using System.Net.Sockets;
+using System.Xml.Linq;
 
 namespace MyAPI.Controllers
 {
@@ -9,7 +11,6 @@ namespace MyAPI.Controllers
     public class ExplorerController : ControllerBase
     {
         #region comments
-
 
         //NAS http://192.168.1.9:32768/explorer
         //$ cd /share/CACHEDEV1_DATA/Public/TEST
@@ -47,6 +48,8 @@ namespace MyAPI.Controllers
 
         #endregion
 
+        //Test if docker VOLs
+        //see region comments
         [HttpGet]
         public IActionResult Get()
         {
